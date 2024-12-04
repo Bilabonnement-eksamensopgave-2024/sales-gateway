@@ -1,1 +1,1 @@
-# skade-gateway
+# sales-gateway
