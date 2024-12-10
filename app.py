@@ -110,15 +110,31 @@ def delete_subscription(id):
 # ----------------------------------------------------- POST /login
 @app.route('/login', methods=['POST'])
 def login():
-    try:
-        response = requests.post(
-            f"{MICROSERVICES['user']}/login",
-            json=request.json
-        )
-        response.raise_for_status()
-        return jsonify(response.json()), response.status_code
-    except requests.RequestException as e:
-        return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
+    response = requests.post(
+        url=f"{MICROSERVICES['user']}/login",
+        cookies=request.cookies,
+        json=request.json,
+        headers={'Content-Type': 'application/json'}
+    )
+
+    if response.status_code == 200:
+        response_data = response.json()
+        
+        # Create the Flask response
+        flask_response = jsonify(response_data)
+        
+        # Extract cookies from the microservice response
+        if 'Authorization' in response.cookies:
+            auth_cookie = response.cookies['Authorization']
+            flask_response.set_cookie('Authorization', auth_cookie, httponly=True, secure=True)
+        
+        return flask_response, 200
+    else:
+        data = response.json()
+        return jsonify({
+            "error": "Failed to fetch from microservice",
+            "data_returned_from_microservice": data
+        }), response.status_code
 
 # ----------------------------------------------------- GET /health
 @app.route('/health', methods=['GET'])
