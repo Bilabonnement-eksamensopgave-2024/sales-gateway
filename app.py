@@ -29,7 +29,11 @@ def get_subscriptions():
     try:
         response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions",cookies=request.cookies)
         response.raise_for_status()
-        return jsonify(response.json()), response.status_code
+        try: 
+            data = response.json() 
+        except requests.exceptions.JSONDecodeError: 
+            data = []
+        return jsonify(data), response.status_code
     except requests.RequestException as e:
         return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
 
@@ -40,7 +44,11 @@ def get_subscription(id):
     try:
         response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}",cookies=request.cookies)
         response.raise_for_status()
-        return jsonify(response.json()), response.status_code
+        try: 
+            data = response.json() 
+        except requests.exceptions.JSONDecodeError: 
+            data = []
+        return jsonify(data), response.status_code
     except requests.RequestException as e:
         return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
 
@@ -51,7 +59,11 @@ def get_subscription_car_info(id):
     try:
         response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}/car",cookies=request.cookies)
         response.raise_for_status()
-        return jsonify(response.json()), response.status_code
+        try: 
+            data = response.json() 
+        except requests.exceptions.JSONDecodeError: 
+            data = []
+        return jsonify(data), response.status_code
     except requests.RequestException as e:
         return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
 
@@ -66,7 +78,11 @@ def post_subscription():
             ,cookies=request.cookies
         )
         response.raise_for_status()
-        return jsonify(response.json()), response.status_code
+        try: 
+            data = response.json() 
+        except requests.exceptions.JSONDecodeError: 
+            data = []
+        return jsonify(data), response.status_code
     except requests.RequestException as e:
         return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
 
@@ -81,18 +97,26 @@ def patch_subscription(id):
             cookies=request.cookies
         )
         response.raise_for_status()
-        return jsonify(response.json()), response.status_code
+        try: 
+            data = response.json() 
+        except requests.exceptions.JSONDecodeError: 
+            data = []
+        return jsonify(data), response.status_code
     except requests.RequestException as e:
         return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
 
 # ----------------------------------------------------- GET /cars/available
 @app.route('/cars/available', methods=['GET'])
-@swag_from('swagger/.yaml')
+@swag_from('swagger/get_available_cars.yaml')
 def get_cars():
     try:
         response = requests.get(f"{MICROSERVICES['car']}/cars/available",cookies=request.cookies)
         response.raise_for_status()
-        return jsonify(response.json()), response.status_code
+        try: 
+            data = response.json() 
+        except requests.exceptions.JSONDecodeError: 
+            data = []
+        return jsonify(data), response.status_code
     except requests.RequestException as e:
         return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
 
@@ -103,7 +127,11 @@ def delete_subscription(id):
     try:
         response = requests.delete(f"{MICROSERVICES['abonnement']}/subscriptions/{id}",cookies=request.cookies)
         response.raise_for_status()
-        return jsonify(response.json()), response.status_code
+        try: 
+            data = response.json() 
+        except requests.exceptions.JSONDecodeError: 
+            data = []
+        return jsonify(data), response.status_code
     except requests.RequestException as e:
         return jsonify({"error": "Failed to fetch from microservice", "details": str(e)}), 500
 
