@@ -14,7 +14,7 @@ load_dotenv()
 MICROSERVICES = {
     "abonnement": os.getenv("ABONNEMENT_MICROSERVICE_URL", "http://localhost:5002"),
     "car": os.getenv("CAR_MICROSERVICE_URL", "http://localhost:5004"),
-    "user": os.getenv("LOGIN_MICROSERVICE_URL", "http://localhost:5005"),
+    "user": os.getenv("LOGIN_MICROSERVICE_URL", "http://localhost:5005")
 }
 
 # Initialize Swagger
@@ -27,7 +27,7 @@ init_swagger(app)
 @swag_from('swagger/get_subscriptions.yaml')
 def get_subscriptions():
     try:
-        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions")
+        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions",cookies=request.cookies)
         response.raise_for_status()
         return jsonify(response.json()), response.status_code
     except requests.RequestException as e:
@@ -38,7 +38,7 @@ def get_subscriptions():
 @swag_from('swagger/get_subscription_by_id.yaml')
 def get_subscription(id):
     try:
-        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}")
+        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}",cookies=request.cookies)
         response.raise_for_status()
         return jsonify(response.json()), response.status_code
     except requests.RequestException as e:
@@ -49,7 +49,7 @@ def get_subscription(id):
 @swag_from('swagger/get_subscription_car_info.yaml')
 def get_subscription_car_info(id):
     try:
-        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}/car")
+        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}/car",cookies=request.cookies)
         response.raise_for_status()
         return jsonify(response.json()), response.status_code
     except requests.RequestException as e:
@@ -63,6 +63,7 @@ def post_subscription():
         response = requests.post(
             f"{MICROSERVICES['abonnement']}/subscriptions",
             json=request.json
+            ,cookies=request.cookies
         )
         response.raise_for_status()
         return jsonify(response.json()), response.status_code
@@ -76,7 +77,8 @@ def patch_subscription(id):
     try:
         response = requests.patch(
             f"{MICROSERVICES['abonnement']}/subscriptions/{id}",
-            json=request.json
+            json=request.json,
+            cookies=request.cookies
         )
         response.raise_for_status()
         return jsonify(response.json()), response.status_code
@@ -85,9 +87,10 @@ def patch_subscription(id):
 
 # ----------------------------------------------------- GET /cars/available
 @app.route('/cars/available', methods=['GET'])
+@swag_from('swagger/.yaml')
 def get_cars():
     try:
-        response = requests.get(f"{MICROSERVICES['car']}/cars/available")
+        response = requests.get(f"{MICROSERVICES['car']}/cars/available",cookies=request.cookies)
         response.raise_for_status()
         return jsonify(response.json()), response.status_code
     except requests.RequestException as e:
@@ -98,7 +101,7 @@ def get_cars():
 @swag_from('swagger/delete_subscription.yaml')
 def delete_subscription(id):
     try:
-        response = requests.delete(f"{MICROSERVICES['abonnement']}/subscriptions/{id}")
+        response = requests.delete(f"{MICROSERVICES['abonnement']}/subscriptions/{id}",cookies=request.cookies)
         response.raise_for_status()
         return jsonify(response.json()), response.status_code
     except requests.RequestException as e:
