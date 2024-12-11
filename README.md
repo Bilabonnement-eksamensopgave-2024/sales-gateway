@@ -57,7 +57,7 @@ The architecture follows a microservice pattern where the gateway forwards clien
 
 **Azure**
 
-https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/docs
+https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/
 
 | **Endpoint**                | **Method** | **Description**                                      | **Request Body**                                                                 | **Response**                                                                                         | **Status Codes**           | **Authentication**      |
 |-----------------------------|------------|------------------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|----------------------------|-------------------------|
@@ -77,3 +77,4 @@ https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/docs
 ## Swagger documentation
 
 Swagger UI for aggregated endpoints is available at https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/docs
+
