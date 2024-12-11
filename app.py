@@ -74,8 +74,8 @@ def post_subscription():
     try:
         response = requests.post(
             f"{MICROSERVICES['abonnement']}/subscriptions",
-            json=request.json
-            ,cookies=request.cookies
+            json=request.json,
+            cookies=request.cookies
         )
         response.raise_for_status()
         try: 
