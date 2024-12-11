@@ -20,7 +20,26 @@ MICROSERVICES = {
 # Initialize Swagger
 init_swagger(app)
 
-
+# ----------------------------------------------------- Root Endpoint: GET /
+@app.route('/', methods=['GET'])
+def root():
+    """
+    Root endpoint for the gateway.
+    Provides a summary of the available endpoints.
+    """
+    return jsonify({
+        "message": "Welcome to the API Gateway",
+        "endpoints": {
+            "GET /subscriptions": "Fetch all subscriptions",
+            "GET /subscriptions/<id>": "Fetch a specific subscription by ID",
+            "GET /subscriptions/<id>/car": "Fetch car info for a specific subscription by ID",
+            "POST /subscriptions": "Create a new subscription",
+            "PATCH /subscriptions/<id>": "Update a subscription by ID",
+            "DELETE /subscriptions/<id>": "Delete a subscription by ID",
+            "GET /cars/available": "Fetch all available cars",
+            "POST /login": "Log in to the service"
+        }
+    }), 200
 
 # ----------------------------------------------------- GET /subscriptions
 @app.route('/subscriptions', methods=['GET'])
