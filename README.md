@@ -25,5 +25,7 @@ This API Gateway acts as an intermediary for various microservices, consolidatin
 graph LR
     A[Browser] --> B[Sales Gateway]
     B --> C[Abonnement Microservice]
+    B --> E[Bil Microservice]
     C --> D[Abonnement Database]
-
+    E --> F[Bil Database]
+    
