@@ -3,6 +3,7 @@
 ## Overview
 This API Gateway acts as an intermediary for various microservices, consolidating multiple endpoints into a unified interface. It is built using Flask and supports secure communication with the microservices for managing subscriptions, cars, and user authentication. 
 
+the gateways is deployed on [Azure](https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/)
 ---
 
 ## Features
@@ -40,6 +41,14 @@ The architecture follows a microservice pattern where the gateway forwards clien
 
 ---
 
+## API Endpoints
+
+### Base url
+
+**Azure**
+
+https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/docs
+
 | **Endpoint**                | **Method** | **Description**                                      | **Request Body**                                                                 | **Response**                                                                                         | **Status Codes**           | **Authentication**      |
 |-----------------------------|------------|------------------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|----------------------------|-------------------------|
 | `/`                         | GET        | Returns a summary of available endpoints             | None                                                                             | JSON with message and list of available endpoints                                                    | 200 OK                     | None                    |
@@ -53,3 +62,8 @@ The architecture follows a microservice pattern where the gateway forwards clien
 | `/login`                     | POST       | Logs in a user to the service                       | JSON object with login credentials (email, password)                             | JSON object with user data and authorization token (cookie)                                          | 200 OK, 401 Unauthorized   | None                    |
 | `/health`                    | GET        | Health check for the API                            | None                                                                             | JSON object with health status ({"status": "healthy"})                                               | 200 OK                     | None                    |
 | `/subscriptions/<id>`        | GET        | Fetches a subscription by ID                        | None                                                                             | JSON object with subscription data                                                                   | 200 OK, 404 Not Found      | Sales role required     |
+
+
+## Swagger documentation
+
+Swagger UI for aggregated endpoints is available at https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/docs
