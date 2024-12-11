@@ -3,7 +3,8 @@
 ## Overview
 This API Gateway acts as an intermediary for various microservices, consolidating multiple endpoints into a unified interface. It is built using Flask and supports secure communication with the microservices for managing subscriptions, cars, and user authentication. 
 
-the gateways is deployed on [Azure](https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/)
+The gateways is deployed on [Azure](https://sales-gateway-adcsa0dwahcxhkep.northeurope-01.azurewebsites.net/)
+
 ---
 
 ## Features
