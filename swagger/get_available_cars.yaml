@@ -5,10 +5,10 @@ description: Retrieve a list of cars that are currently available.
 parameters:
   - in: cookie
     name: Authorization
-    required: true
+    required: false
     schema:
       type: string
-    description: JWT token with the required role - ['admin','sales']
+    description: JWT token with the required role - ['admin', 'sales']
 responses:
   200:
     description: A list of available cars
@@ -36,6 +36,3 @@ responses:
               type: string
 security:
   - cookieAuth: []
-x-swagger-roles:
-  - admin
-  - sales

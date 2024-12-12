@@ -22,23 +22,75 @@ init_swagger(app)
 
 # ----------------------------------------------------- Root Endpoint: GET /
 @app.route('/', methods=['GET'])
-def root():
-    """
-    Root endpoint for the gateway.
-    Provides a summary of the available endpoints.
-    """
+def service_info():
     return jsonify({
-        "message": "Welcome to the API Gateway",
-        "endpoints": {
-            "GET /subscriptions": "Fetch all subscriptions",
-            "GET /subscriptions/<id>": "Fetch a specific subscription by ID",
-            "GET /subscriptions/<id>/car": "Fetch car info for a specific subscription by ID",
-            "POST /subscriptions": "Create a new subscription",
-            "PATCH /subscriptions/<id>": "Update a subscription by ID",
-            "DELETE /subscriptions/<id>": "Delete a subscription by ID",
-            "GET /cars/available": "Fetch all available cars",
-            "POST /login": "Log in to the service"
-        }
+        "service": "Sales Gateway",
+        "description": "This gateway manages sales operations including subscriptions, pricing, and inventory.",
+        "endpoints": [
+            {
+                "path": "/subscriptions",
+                "method": "GET",
+                "description": "Get all subscriptions",
+                "response": "JSON array of subscription objects",
+                "role_required": "admin, sales"
+            },
+            {
+                "path": "/subscriptions/<int:id>",
+                "method": "GET",
+                "description": "Get subscription by ID",
+                "response": "JSON object of the subscription",
+                "role_required": "admin, sales"
+            },
+            {
+                "path": "/subscriptions/<int:id>/car",
+                "method": "GET",
+                "description": "Get car information for a subscription",
+                "response": "JSON object of the car information",
+                "role_required": "admin, sales"
+            },
+            {
+                "path": "/subscriptions",
+                "method": "POST",
+                "description": "Create a new subscription",
+                "response": "JSON object of the created subscription",
+                "role_required": "admin, sales"
+            },
+            {
+                "path": "/subscriptions/<int:id>",
+                "method": "PATCH",
+                "description": "Update subscription by ID",
+                "response": "JSON object of the updated subscription",
+                "role_required": "admin, sales"
+            },
+            {
+                "path": "/cars/available",
+                "method": "GET",
+                "description": "Get all available cars",
+                "response": "JSON array of available car objects",
+                "role_required": "admin, sales"
+            },
+            {
+                "path": "/subscriptions/<int:id>",
+                "method": "DELETE",
+                "description": "Delete subscription by ID",
+                "response": "JSON object of the deleted subscription",
+                "role_required": "admin, sales"
+            },
+            {
+                "path": "/login",
+                "method": "POST",
+                "description": "User login",
+                "response": "JSON object with login details and authorization token",
+                "role_required": "none"
+            },
+            {
+                "path": "/health",
+                "method": "GET",
+                "description": "Health check",
+                "response": "JSON object with status of the service",
+                "role_required": "none"
+            }
+        ]
     }), 200
 
 # ----------------------------------------------------- GET /subscriptions
