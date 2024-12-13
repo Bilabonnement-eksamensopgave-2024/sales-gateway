@@ -36,9 +36,9 @@ The gateways is deployed on [Azure](https://sales-gateway-adcsa0dwahcxhkep.north
 graph LR
     A[Browser] --> B[Sales Gateway]
     B --> C[Subscription Microservice]
-    B --> E[Bil Microservice]
+    B --> E[Car Microservice]
     C --> D[Subscription Database]
-    E --> F[Bil Database]
+    E --> F[Car Database]
 ```
     
 The architecture follows a microservice pattern where the gateway forwards client requests to the appropriate microservices based on the defined endpoints.
