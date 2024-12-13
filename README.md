@@ -35,9 +35,9 @@ The gateways is deployed on [Azure](https://sales-gateway-adcsa0dwahcxhkep.north
 ```mermaid
 graph LR
     A[Browser] --> B[Sales Gateway]
-    B --> C[Abonnement Microservice]
+    B --> C[Subscription Microservice]
     B --> E[Bil Microservice]
-    C --> D[Abonnement Database]
+    C --> D[Subscription Database]
     E --> F[Bil Database]
 ```
     
@@ -45,7 +45,7 @@ The architecture follows a microservice pattern where the gateway forwards clien
 
 - **Gateway**: Routes and manages requests.
 - **Microservices**:
-  - `Abonnement`: Handles subscription-related operations.
+  - `Subscription`: Handles subscription-related operations.
   - `Car`: Manages car-related operations.
   - `User`: Handles user authentication and session management.
 

@@ -12,7 +12,7 @@ load_dotenv()
 
 # MICROSERVICES:
 MICROSERVICES = {
-    "abonnement": os.getenv("ABONNEMENT_MICROSERVICE_URL", "http://localhost:5002"),
+    "subscription": os.getenv("ABONNEMENT_MICROSERVICE_URL", "http://localhost:5002"),
     "car": os.getenv("CAR_MICROSERVICE_URL", "http://localhost:5004"),
     "user": os.getenv("LOGIN_MICROSERVICE_URL", "http://localhost:5005")
 }
@@ -98,7 +98,7 @@ def service_info():
 @swag_from('swagger/get_subscriptions.yaml')
 def get_subscriptions():
     try:
-        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions",cookies=request.cookies)
+        response = requests.get(f"{MICROSERVICES['subscription']}/subscriptions",cookies=request.cookies)
         response.raise_for_status()
         try: 
             data = response.json() 
@@ -113,7 +113,7 @@ def get_subscriptions():
 @swag_from('swagger/get_subscription_by_id.yaml')
 def get_subscription(id):
     try:
-        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}",cookies=request.cookies)
+        response = requests.get(f"{MICROSERVICES['subscription']}/subscriptions/{id}",cookies=request.cookies)
         response.raise_for_status()
         try: 
             data = response.json() 
@@ -128,7 +128,7 @@ def get_subscription(id):
 @swag_from('swagger/get_subscription_car_info.yaml')
 def get_subscription_car_info(id):
     try:
-        response = requests.get(f"{MICROSERVICES['abonnement']}/subscriptions/{id}/car",cookies=request.cookies)
+        response = requests.get(f"{MICROSERVICES['subscription']}/subscriptions/{id}/car",cookies=request.cookies)
         response.raise_for_status()
         try: 
             data = response.json() 
@@ -144,7 +144,7 @@ def get_subscription_car_info(id):
 def post_subscription():
     try:
         response = requests.post(
-            f"{MICROSERVICES['abonnement']}/subscriptions",
+            f"{MICROSERVICES['subscription']}/subscriptions",
             json=request.json,
             cookies=request.cookies
         )
@@ -163,7 +163,7 @@ def post_subscription():
 def patch_subscription(id):
     try:
         response = requests.patch(
-            f"{MICROSERVICES['abonnement']}/subscriptions/{id}",
+            f"{MICROSERVICES['subscription']}/subscriptions/{id}",
             json=request.json,
             cookies=request.cookies
         )
@@ -196,7 +196,7 @@ def get_cars():
 @swag_from('swagger/delete_subscription.yaml')
 def delete_subscription(id):
     try:
-        response = requests.delete(f"{MICROSERVICES['abonnement']}/subscriptions/{id}",cookies=request.cookies)
+        response = requests.delete(f"{MICROSERVICES['subscription']}/subscriptions/{id}",cookies=request.cookies)
         response.raise_for_status()
         try: 
             data = response.json() 
